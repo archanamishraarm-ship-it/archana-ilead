@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  ARCHANA'S PERSONAL SCRAPBOOK WEBSITE
+  ============================================================
+  HOW THIS FILE IS ORGANISED (read top to bottom):
+
+    1. <head>   -> page title and settings (not visible on the page)
+    2. <style>  -> CSS: colours, fonts, spacing, animations
+    3. <body>   -> HTML: the actual content you see on the page
+    4. <script> -> JavaScript: typing effect, scroll fade-in, clock
+
+  TIPS FOR EDITING:
+    - Keep this file in the SAME folder as the "images" folder.
+    - To change text, find it in the <body> section and edit it.
+    - To change a picture, replace the file inside "images" with a
+      new one that has the SAME file name (or change the name in
+      the src="..." part of the <img> tag).
+    - Notes like this one are comments. They are only for humans;
+      the browser ignores them.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- makes the page fit phones -->
+  <meta name="theme-color" content="#fff4e8">
+  <meta name="description" content="Archana Mishra's personal scrapbook: electrical engineering, creativity, films, and the things that make her, her.">
+  <title>Archana Mishra — My Digital Scrapbook</title>
+
+  <style>
+    /* ==========================================================
+       CSS = how the page LOOKS.
+       Each block looks like:   what-to-style { property: value; }
+       ========================================================== */
+
+
+    /* ---------- 1. COLOUR PALETTE ----------
+       Colours are saved once as "variables" here, then used
+       everywhere with var(--name). Change one here and it changes
+       across the whole site. */
+    :root {
+      --ink: #403347;        /* main text colour */
+      --muted: #716578;      /* softer grey-purple text */
+      --paper: #fffaf3;      /* cream card background */
+      --pink: #f2a8c4;
+      --peach: #f8c9a8;
+      --lilac: #c9b9ee;
+      --mint: #b9ddcb;
+      --yellow: #f6df91;
+      --line: #e8d9cc;
+      --dark-ink: #403347;
+    }
+
+
+    /* ---------- 2. BASIC PAGE SETUP ---------- */
+
+    /* Makes width/height include padding, so sizes behave predictably */
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Smooth scrolling when you click a menu link.
+       scroll-padding-top leaves room for the sticky menu bar. */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    /* The whole page: text colour, dotted paper background, font */
+    body {
+      margin: 0;
+      color: var(--ink);
+      background-color: #fff4e8;
+      background-image: radial-gradient(#e7cfc0 0.7px, transparent 0.7px); /* tiny dots */
+      background-size: 18px 18px;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent; /* removes the grey flash when tapping on phones */
+    }
+
+
+    /* ---------- 3. NAVIGATION BAR (top menu) ---------- */
+
+    nav {
+      position: sticky;   /* stays at the top while you scroll */
+      top: 0;
+      z-index: 20;        /* keeps it above everything else */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 15px 7%;
+      background: rgba(255, 250, 243, .94);
+      border-bottom: 2px dashed #e6cfc0;
+    }
+
+    .logo {
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #b65d83;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 16px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13px;
+      color: var(--muted);
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: #b65d83;
+    }
+
+
+    /* ---------- 4. SECTIONS & HEADINGS ---------- */
+
+    section {
+      padding: 88px 10%;
+    }
+
+    /* The small coloured label above each heading */
+    .eyebrow {
+      color: #56836d;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 86px); /* grows/shrinks with screen size */
+      line-height: .99;
+      letter-spacing: -3px;
+      margin: 20px 0;
+    }
+
+    /* Coloured gradient text, used on highlighted words */
+    .gradient {
+      color: #b65d83;
+      background: linear-gradient(100deg, #b65d83, #c17b55, #7966a7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-head {
+      max-width: 750px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4.5vw, 53px);
+      line-height: 1.08;
+      margin: 12px 0;
+      letter-spacing: -1.5px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 650px;
+      margin-top: 10px;
+    }
+
+
+    /* ---------- 5. HERO (the first big section) ---------- */
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1.25fr .75fr; /* text on the left, photo on the right */
+      align-items: center;
+      gap: 40px;
+      padding-top: 70px;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 650px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    /* Buttons */
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 19px;
+      border-radius: 8px 20px 8px 20px;
+      color: #493246;
+      font-weight: 800;
+      background: var(--pink);
+      border: 1px solid #e7a0bb;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 3px 4px 0 #e7c8b8;
+    }
+
+    .button:hover {
+      transform: translateY(-3px) rotate(-1deg);
+      box-shadow: 5px 6px 0 #e7c8b8;
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px dashed #c8aab8;
+    }
+
+    /* The area on the right that holds the photo and floating stickers */
+    .scrapbook {
+      position: relative;
+      min-height: 390px;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Round floating stickers around the hero photo */
+    .sticker {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+      font-size: 31px;
+      box-shadow: 3px 5px 0 #d8c5b8;
+      animation: float 4s ease-in-out infinite; /* the up-and-down bobbing */
+    }
+
+    .sticker.one {
+      background: var(--mint);
+      color: #253d37;
+      top: 20px;
+      right: 1%;
+      transform: rotate(12deg);
+    }
+
+    .sticker.two {
+      background: var(--lilac);
+      color: #322848;
+      bottom: 8px;
+      left: 2%;
+      animation-delay: -1.4s;
+    }
+
+    .sticker.three {
+      background: var(--yellow);
+      color: #54362d;
+      bottom: 30px;
+      right: 0;
+      width: 58px;
+      height: 58px;
+      font-size: 25px;
+      animation-delay: -.8s;
+    }
+
+    /* The bobbing animation: move up 8px at the halfway point, then come back */
+    @keyframes float {
+      0%, 100% { translate: 0 0; }
+      50%      { translate: 0 -8px; }
+    }
+
+    /* The typing text and the little clock under the hero buttons */
+    #typing {
+      display: inline-block;
+      min-height: 1.05em;
+    }
+
+    #clock {
+      color: #9b4f74;
+      font-size: 12px;
+      margin-top: 22px;
+      letter-spacing: .5px;
+    }
+
+
+    /* ---------- 6. CARDS (About, Projects, Creative sections) ---------- */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* as many columns as fit */
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .card {
+      position: relative;
+      padding: 24px;
+      border: 1px solid #ead7ca;
+      border-radius: 8px 20px 8px 20px;
+      background: var(--paper);
+      box-shadow: 4px 5px 0 #ead8ca;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    /* The little strip of pink "tape" on top of each card */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 24px;
+      width: 54px;
+      height: 15px;
+      background: #f2c4d5b8;
+      transform: rotate(-3deg);
+    }
+
+    /* Card lifts up slightly when the mouse is over it */
+    .card:hover {
+      transform: translateY(-5px) rotate(-.4deg);
+      box-shadow: 7px 8px 0 #ead8ca;
+    }
+
+    .card .emoji {
+      font-size: 29px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+
+    /* Small dashed "tag" labels (skills, topics) */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 5px 12px 5px 12px;
+      border: 1px dashed #cda9b9;
+      color: #9b4f74;
+      font-size: 12px;
+      background: #fffaf3;
+    }
+
+
+    /* ---------- 7. JOURNEY TIMELINE ---------- */
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 48px 1fr; /* icon column + text column */
+      gap: 15px;
+      align-items: start;
+    }
+
+    .timeline-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #eee6fb;
+      border: 1px dashed #b5a1d9;
+      font-size: 21px;
+    }
+
+    .timeline-content {
+      padding: 18px 20px;
+      border: 1px solid #ead7ca;
+      background: var(--paper);
+      box-shadow: 3px 4px 0 #ead8ca;
+      border-radius: 4px 16px 4px 16px;
+    }
+
+    .timeline-content h3 {
+      margin: 0 0 6px;
+    }
+
+    .timeline-content p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .tape-label {
+      display: inline-block;
+      padding: 6px 10px;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      color: #403347;
+      background: var(--mint);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+    }
+
+
+    /* ---------- 8. WATCHLIST (film cards) ---------- */
+
+    .film-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    .film-card {
+      min-height: 185px;
+      padding: 17px;
+      border-radius: 8px 18px 8px 18px;
+      border: 1px solid #e8d4c8;
+      background: #fffdf7;
+      box-shadow: 4px 5px 0 #ead8ca;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .25s;
+    }
+
+    /* Every 2nd card gets a light pink background */
+    .film-card:nth-child(2n) {
+      background: #f8edf3;
+    }
+
+    .film-card:hover {
+      transform: translateY(-5px) rotate(1deg);
+    }
+
+    .film-card .film-emoji {
+      font-size: 28px;
+    }
+
+    .film-card strong {
+      font-size: 16px;
+    }
+
+    .film-card small {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+
+    /* ---------- 9. QUOTE SECTION & FOOTER ---------- */
+
+    .quote {
+      font-size: clamp(24px, 4vw, 42px);
+      line-height: 1.4;
+      max-width: 850px;
+    }
+
+    .quote-mark {
+      color: #b65d83;
+      font-size: 65px;
+      line-height: .5;
+    }
+
+    footer {
+      padding: 35px 10%;
+      border-top: 2px dashed #e6cfc0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      background: #fffaf3;
+    }
+
+
+    /* ---------- 10. FADE-IN WHEN SCROLLING ----------
+       Sections start invisible and slightly lower down.
+       The JavaScript at the bottom adds the class "visible"
+       when you scroll to them, which fades them in. */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* ---------- 11. PHOTOS (framed like little printed pictures) ---------- */
+
+    /* The big hero photo frame */
+    .hero-photo-wrap {
+      position: relative;
+      width: min(320px, 82vw);
+      margin: 0 auto;
+      padding: 12px 12px 42px; /* extra space at the bottom for the caption */
+      background: #fffdf7;
+      border: 1px solid #eadbca;
+      box-shadow: 8px 10px 0 #e8d5c6;
+      transform: rotate(3deg);
+    }
+
+    /* Pink tape on top of the hero photo */
+    .hero-photo-wrap::before {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      top: -11px;
+      left: calc(50% - 48px);
+      width: 96px;
+      height: 25px;
+      background: #f2a8c4cc;
+      transform: rotate(-4deg);
+    }
+
+    .hero-photo {
+      display: block;
+      width: 100%;
+      height: 350px;
+      object-fit: cover;               /* crops the photo to fill the frame without stretching */
+      object-position: center 35%;     /* which part of the photo stays visible */
+    }
+
+    .photo-caption {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 10px;
+      text-align: center;
+      font-family: "Segoe Print", "Comic Sans MS", cursive;
+      font-size: 16px;
+      color: #9b4f74;
+    }
+
+    .hero-photo-sticker {
+      position: absolute;
+      z-index: 3;
+      right: -18px;
+      bottom: 25px;
+      background: #f6df91;
+      padding: 11px 13px;
+      border-radius: 50%;
+      box-shadow: 3px 4px 0 #e8d5c6;
+      transform: rotate(12deg);
+      font-size: 24px;
+    }
+
+    /* The gallery in "My life in little snapshots" */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .photo-card {
+      position: relative;
+      padding: 10px 10px 16px;
+      background: #fffdf7;
+      border: 1px solid #eadbca;
+      box-shadow: 5px 6px 0 #ead8ca;
+      transform: rotate(var(--tilt, -1deg)); /* each card is tilted a little */
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    /* Different tilt and background for every 2nd and 3rd card */
+    .photo-card:nth-child(2n) {
+      --tilt: 1.5deg;
+      background: #fff8fb;
+    }
+
+    .photo-card:nth-child(3n) {
+      --tilt: -1.7deg;
+      background: #fbfff9;
+    }
+
+    /* Pink tape on top of each photo card */
+    .photo-card::before {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      top: -8px;
+      left: 25px;
+      width: 62px;
+      height: 17px;
+      background: #f2c4d5c9;
+      transform: rotate(-5deg);
+    }
+
+    /* Photo straightens and lifts when the mouse is over it */
+    .photo-card:hover {
+      transform: translateY(-5px) rotate(0);
+      box-shadow: 8px 9px 0 #ead8ca;
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      background: #f5e9df; /* shown briefly while the picture loads */
+    }
+
+    /* The handwritten caption under each photo */
+    .photo-card figcaption {
+      padding: 13px 5px 0;
+      font-family: "Segoe Print", "Comic Sans MS", cursive;
+      color: #9b4f74;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    /* The small grey sentence under the caption */
+    .photo-card .photo-note {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .photo-section-note {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 12px 16px;
+      background: #fffdf7;
+      border: 1px dashed #cda9b9;
+      transform: rotate(-1deg);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+
+    /* ---------- 12. MOBILE / SMALL SCREEN RULES ----------
+       "@media (max-width: 760px)" means: only apply these
+       rules when the screen is 760px wide or narrower (phones). */
+
+    @media (max-width: 760px) {
+      nav {
+        padding: 13px 5%;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 9px 12px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr; /* stack text above photo */
+        padding-top: 65px;
+        gap: 10px;
+      }
+
+      .scrapbook {
+        min-height: 360px;
+      }
+
+      section {
+        padding: 70px 7%;
+      }
+
+      h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .hero-photo {
+        height: 320px;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 photos per row */
+        gap: 16px;
+      }
+
+      .photo-card img {
+        height: 190px;
+      }
+
+      .photo-card figcaption {
+        font-size: 14px;
+      }
+    }
+
+    /* Very small phones: 1 photo per row */
+    @media (max-width: 420px) {
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-card img {
+        height: 290px;
+      }
+    }
+
+    /* Respect people who turn off animations in their device settings */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- ==========================================================
+       TOP MENU
+       Each link's href="#name" jumps to the section that has
+       id="name" further down the page.
+       ========================================================== -->
+  <nav>
+    <a class="logo" href="#home" style="text-decoration:none">ARCHANA ✦</a>
+    <div class="nav-links" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#journey">Journey</a>
+      <a href="#creative">Creative side</a>
+      <a href="#memories">Memories</a>
+      <a href="#watchlist">Watchlist</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ========================================================
+         HERO: the first thing visitors see
+         ======================================================== -->
+    <section class="hero" id="home">
+
+      <!-- Left side: intro text and buttons -->
+      <div class="hero-copy">
+        <div class="eyebrow">✿ A scrapbook of the things that make me, me</div>
+
+        <!-- The <span id="typing"> is filled in by the JavaScript at the bottom -->
+        <h1>Hi, I'm<br><span class="gradient">Archana Mishra.</span><br><span id="typing"></span></h1>
+
+        <p>
+          Electrical engineering student, curious learner, creative soul, and collector
+          of stories — from the screen, the places I visit, and the little moments in between.
+          This is my corner of the internet: a work in progress, just like me.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button" href="#about">Come on in ↗</a>
+          <a class="button secondary" href="#creative">Explore my creative side ✿</a>
+        </div>
+
+        <!-- The JavaScript at the bottom writes the current time here -->
+        <div id="clock" aria-live="polite"></div>
+      </div>
+
+      <!-- Right side: main photo and floating stickers -->
+      <div class="scrapbook" aria-label="A scrapbook photo of Archana">
+        <div class="hero-photo-wrap">
+          <img class="hero-photo" src="images/archana-main.jpg" alt="Archana smiling for a casual selfie" fetchpriority="high">
+          <div class="photo-caption">just me</div>
+          <div class="hero-photo-sticker" aria-hidden="true">✿</div>
+        </div>
+
+        <div class="sticker one" title="Curiosity">✧</div>
+        <div class="sticker two" title="Creativity">🎨</div>
+        <div class="sticker three" title="Travel">✈</div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         01 · ABOUT
+         ======================================================== -->
+    <section id="about" class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">01 / The person behind the page</div>
+        <h2 class="section-title">A little bit of <span class="gradient">everything.</span></h2>
+        <p class="section-intro">
+          I'm studying Electrical Engineering at Veer Surendra Sai University of Technology
+          (VSSUT), Burla. I enjoy understanding how things work, learning new skills, and
+          finding creative ways to express ideas. Engineering is one part of my story —
+          design, films, travel, and everyday discoveries are part of it too.
+        </p>
+      </div>
+
+      <!-- Three cards. To add another card, copy one <article> block and edit it. -->
+      <div class="grid">
+        <article class="card">
+          <div class="emoji">⚡</div>
+          <h3>The problem-solver</h3>
+          <p>Electrical engineering gives me ways to explore systems, think logically, and work through challenges one step at a time.</p>
+        </article>
+
+        <article class="card">
+          <div class="emoji">🎨</div>
+          <h3>The creative one</h3>
+          <p>Graphic design, painting, and journaling give me space to play with ideas and turn feelings or inspiration into something visual.</p>
+        </article>
+
+        <article class="card">
+          <div class="emoji">🎥</div>
+          <h3>The storyteller</h3>
+          <p>I'm interested in vlogging and capturing experiences — little moments, new places, and stories worth remembering.</p>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         02 · JOURNEY (timeline + skill tags)
+         ======================================================== -->
+    <section id="journey" class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">02 / Learning log</div>
+        <h2 class="section-title">My journey, <span class="gradient">one chapter at a time.</span></h2>
+        <p class="section-intro">A snapshot of what I've studied, explored, and am working to learn. This page can grow as my journey does.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-icon">🎓</div>
+          <div class="timeline-content">
+            <span class="tape-label">Education</span>
+            <h3>Electrical Engineering</h3>
+            <p>Currently studying at Veer Surendra Sai University of Technology (VSSUT), Burla.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">🧰</div>
+          <div class="timeline-content">
+            <span class="tape-label">Tools & training</span>
+            <h3>Exploring engineering tools</h3>
+            <p>My learning includes MATLAB, AutoCAD, and SCADA, alongside the fundamentals of electrical engineering.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">💻</div>
+          <div class="timeline-content">
+            <span class="tape-label">Currently learning</span>
+            <h3>Web development & software engineering</h3>
+            <p>I'm exploring HTML, CSS, JavaScript, programming, and software engineering — building new skills by making things and learning as I go.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill tags -->
+      <div class="chips" aria-label="Skills">
+        <span class="chip">Electrical Engineering</span>
+        <span class="chip">MATLAB</span>
+        <span class="chip">AutoCAD</span>
+        <span class="chip">SCADA</span>
+        <span class="chip">HTML / CSS / JavaScript</span>
+        <span class="chip">Programming — learning</span>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         03 · PROJECTS
+         ======================================================== -->
+    <section id="projects" class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">03 / The project shelf</div>
+        <h2 class="section-title">Ideas I've been <span class="gradient">exploring.</span></h2>
+        <p class="section-intro">A few engineering and learning projects that reflect my curiosity. Each one represents concepts I've explored, not a claim of a finished product or award.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="emoji">🚗</div>
+          <h3>EV BLDC Motor Control</h3>
+          <p>Exploring PID speed control and torque ripple reduction in brushless DC motors for electric vehicle applications.</p>
+          <div class="chips"><span class="chip">EV</span><span class="chip">Control systems</span></div>
+        </article>
+
+        <article class="card">
+          <div class="emoji">🌱</div>
+          <h3>Smart Irrigation</h3>
+          <p>A project concept using soil-moisture feedback and a pump to support more responsive watering.</p>
+          <div class="chips"><span class="chip">Sensors</span><span class="chip">Automation</span></div>
+        </article>
+
+        <article class="card">
+          <div class="emoji">☀️</div>
+          <h3>PV Inverter Control</h3>
+          <p>Learning about solar PV systems and exploring Sliding Mode Control (SMC) as an alternative controller approach.</p>
+          <div class="chips"><span class="chip">Solar PV</span><span class="chip">MATLAB / Simulink</span></div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         04 · CREATIVE CORNER
+         ======================================================== -->
+    <section id="creative" class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">04 / Outside the lecture notes</div>
+        <h2 class="section-title">Welcome to my <span class="gradient">creative corner.</span></h2>
+        <p class="section-intro">Not everything has to be a technical project. Sometimes it can be a design, a page in a journal, a video, or a moment I wanted to keep.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="emoji">🖼️</div>
+          <h3>Graphic design</h3>
+          <p>Playing with layouts, typography, colours, and visual ideas. This space can become a gallery for my designs and edits.</p>
+        </article>
+
+        <article class="card">
+          <div class="emoji">📹</div>
+          <h3>Vlogging & visual diaries</h3>
+          <p>Capturing experiences and turning little everyday moments into stories. The best memories deserve a replay.</p>
+        </article>
+
+        <article class="card">
+          <div class="emoji">🖌️</div>
+          <h3>Painting & journaling</h3>
+          <p>A slower, more personal kind of creativity — making things by hand, collecting thoughts, and giving ideas somewhere to live.</p>
+        </article>
+
+        <article class="card">
+          <div class="emoji">🌍</div>
+          <h3>Curious about the world</h3>
+          <p>I love discovering other places and cuisines. Food can be its own kind of travel, even before the actual trip.</p>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         05 · MEMORIES (photo gallery)
+         Each photo is a <figure> with:
+           <img>        -> the picture (src = file inside "images")
+           <figcaption> -> the handwritten caption + small note
+         To add a photo: copy one <figure> block, change the
+         src, alt (description for screen readers) and the text.
+         ======================================================== -->
+    <section id="memories" class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">05 / Little moments, kept forever</div>
+        <h2 class="section-title">My life in <span class="gradient">little snapshots.</span></h2>
+        <p class="section-intro">
+          A few things that make me happy: meeting animals, trying different food, finding new places,
+          making time for chai, moving to music, and showing up for myself at the gym.
+          Basically, a tiny photo diary of the things I want to remember.
+        </p>
+      </div>
+
+      <div class="photo-grid">
+
+        <!-- Photo 1 -->
+        <figure class="photo-card">
+          <img src="images/funny-cat.jpg" alt="A cat sitting outside with its tongue out" loading="lazy">
+          <figcaption>Animal lover ♡<span class="photo-note">Every animal has a little place in my heart.</span></figcaption>
+        </figure>
+
+        <!-- Photo 2 -->
+        <figure class="photo-card">
+          <img src="images/food-sushi.jpg" alt="A plate of food with sushi rolls and other bites" loading="lazy">
+          <figcaption>Food adventures 🍽️<span class="photo-note">Trying new flavours is its own kind of travel.</span></figcaption>
+        </figure>
+
+        <!-- Photo 3 (caption changed to "Trekking through life") -->
+        <figure class="photo-card">
+          <img src="images/trekking-friends.jpg" alt="Archana and friends enjoying a waterfall trek" loading="lazy">
+          <figcaption>Trekking through life<span class="photo-note">Good company, happy memories.</span></figcaption>
+        </figure>
+
+        <!-- Photo 4 -->
+        <figure class="photo-card">
+          <img src="images/exploring-places.jpg" alt="Archana visiting an outdoor animal enclosure near an elephant" loading="lazy">
+          <figcaption>Out exploring 🌿<span class="photo-note">A change of scenery always makes a good story.</span></figcaption>
+        </figure>
+
+        <!-- Photo 5 (this was blank before; new photo added) -->
+        <figure class="photo-card">
+          <img src="images/animal-outing.jpg" alt="Archana smiling beside a fence while an elephant walks on the grass behind her" loading="lazy">
+          <figcaption>Little adventures ✨<span class="photo-note">Collecting places, pictures, and stories along the way.</span></figcaption>
+        </figure>
+
+        <!-- Photo 6 -->
+        <figure class="photo-card">
+          <img src="images/chai-time.jpg" alt="Archana holding a small cup of chai beside the water" loading="lazy">
+          <figcaption>Chai is always a good idea ☕<span class="photo-note">A small cup and a little pause in the day.</span></figcaption>
+        </figure>
+
+        <!-- Photo 7 -->
+        <figure class="photo-card">
+          <img src="images/dance-and-culture.jpg" alt="Archana sitting in a traditional outfit in a flower garden" loading="lazy">
+          <figcaption>Dance & culture 💃<span class="photo-note">I took part in a dance competition at NIT Rourkela.</span></figcaption>
+        </figure>
+
+        <!-- Photo 8 -->
+        <figure class="photo-card">
+          <img src="images/gym-time.jpg" alt="A hand holding a dumbbell during a gym session" loading="lazy">
+          <figcaption>Showing up for myself 💪<span class="photo-note">Gym time is my reminder to keep going, one rep at a time.</span></figcaption>
+        </figure>
+
+      </div>
+
+      <div class="photo-section-note">Made of little joys, big dreams, and a lot of chai. ♡</div>
+    </section>
+
+
+    <!-- ========================================================
+         06 · WATCHLIST
+         ======================================================== -->
+    <section id="watchlist" class="reveal">
+      <div class="section-head">
+        <div class="eyebrow">06 / Popcorn, plot twists & late-night episodes</div>
+        <h2 class="section-title">My little <span class="gradient">screen universe.</span></h2>
+        <p class="section-intro">Sci-fi, thriller, suspense, and rom-coms — depending on the mood. Here are some shows on my favourites list.</p>
+      </div>
+
+      <div class="film-grid">
+        <article class="film-card"><div class="film-emoji">🚲</div><strong>Stranger Things</strong><small>Supernatural mystery · sci-fi vibes</small></article>
+        <article class="film-card"><div class="film-emoji">🎭</div><strong>Money Heist</strong><small>Heists, tension, and twists</small></article>
+        <article class="film-card"><div class="film-emoji">🔺</div><strong>Squid Game</strong><small>Survival thriller · high stakes</small></article>
+        <article class="film-card"><div class="film-emoji">🃏</div><strong>Alice in Borderland</strong><small>Mystery, games, and suspense</small></article>
+      </div>
+
+      <div class="chips"><span class="chip">Sci-fi</span><span class="chip">Thriller</span><span class="chip">Suspense</span><span class="chip">Rom-com</span></div>
+    </section>
+
+
+    <!-- (The "Passport dreams" travel section was removed from here.) -->
+
+
+    <!-- ========================================================
+         07 · CLOSING QUOTE
+         ======================================================== -->
+    <section class="reveal" id="next">
+      <div class="eyebrow">07 / Still becoming</div>
+      <div class="quote-mark">“</div>
+      <p class="quote">I'm building a future with both sides of me in it: the part that loves to solve problems, and the part that wants to make something beautiful.</p>
+      <p class="section-intro">Learning, creating, travelling when I can, finding my next favourite show, and staying curious about what comes next.</p>
+      <a class="button" href="#home">Back to the beginning ↑</a>
+    </section>
+
+  </main>
+
+
+  <!-- ==========================================================
+       FOOTER
+       ========================================================== -->
+  <footer>
+    <p>Made with curiosity, creativity & a little scrapbook magic ✿</p>
+    <p>Archana Mishra · iLEAD 2027 · Still becoming.</p>
+  </footer>
+
+
+  <script>
+    /* ==========================================================
+       JAVASCRIPT = how the page BEHAVES.
+       There are three small features below.
+       ========================================================== */
+
+
+    /* ---------- FEATURE 1: Typing effect in the hero heading ----------
+       Types out a phrase one letter at a time, deletes it,
+       then moves on to the next phrase. To change the phrases,
+       just edit the words inside the list below. */
+
+    const phrases = [
+      "an engineer in progress ✦",
+      "a creative mind ✿",
+      "a collector of stories ♡"
+    ];
+
+    let phraseIndex = 0;   // which phrase we're on (0 = the first one)
+    let charIndex = 0;     // how many letters are currently showing
+    let deleting = false;  // true while the text is being erased
+
+    function typeText() {
+      const typingSpot = document.getElementById("typing");
+      if (!typingSpot) return; // do nothing if the element isn't on the page
+
+      const phrase = phrases[phraseIndex];
+
+      // Show only the first "charIndex" letters of the phrase
+      typingSpot.textContent = phrase.substring(0, charIndex);
+
+      if (!deleting && charIndex < phrase.length) {
+        // Still typing: add a letter, then wait 78 milliseconds
+        charIndex++;
+        setTimeout(typeText, 78);
+      } else if (deleting && charIndex > 0) {
+        // Erasing: remove a letter, then wait 38 milliseconds
+        charIndex--;
+        setTimeout(typeText, 38);
+      } else {
+        // Finished typing or erasing: flip direction
+        deleting = !deleting;
+
+        // After erasing, move on to the next phrase (loop back to the first at the end)
+        if (!deleting) {
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+
+        // Pause briefly (longer after finishing a phrase)
+        setTimeout(typeText, deleting ? 900 : 250);
+      }
+    }
+
+    typeText(); // start the effect
+
+
+    /* ---------- FEATURE 2: Fade sections in as you scroll ----------
+       Watches every element with the class "reveal". When one
+       scrolls into view, we add the class "visible" (see the CSS
+       above), which fades it in. */
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target); // only animate once
+          }
+        });
+      }, { threshold: 0.10 }); // trigger when 10% of the section is visible
+
+      document.querySelectorAll(".reveal").forEach(function (section) {
+        observer.observe(section);
+      });
+    } else {
+      // Very old browsers: just show everything straight away
+      document.querySelectorAll(".reveal").forEach(function (section) {
+        section.classList.add("visible");
+      });
+    }
+
+
+    /* ---------- FEATURE 3: Little clock under the hero buttons ----------
+       Shows the visitor's current local time and refreshes
+       every 30 seconds. */
+
+    function updateClock() {
+      const clock = document.getElementById("clock");
+      if (clock) {
+        const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        clock.textContent = "A little moment in time · " + time;
+      }
+    }
+
+    updateClock();                    // show it immediately
+    setInterval(updateClock, 30000);  // then refresh every 30,000 ms (30 seconds)
+  </script>
+
+</body>
+</html>
